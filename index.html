@@ -1,603 +1,701 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Yogendra Singh Negi Portfolio</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-
-    <link rel="stylesheet" href="css/aos.css">
-
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
-
-
-
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yogendra Singh Negi — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <style>
-
-/*======================================
-//--//-->   ABOUT
-======================================*/
-
-.about-mf .box-shadow-full {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-.about-mf .about-img {
-  margin-bottom: 2rem;
-}
-
-.about-mf .about-img img {
-  margin-left: 10px;
-}
-
-
-.skill-mf .progress {
-  /* background-color: #cde1f8; */
-  margin: .5rem 0 1.2rem 0;
-  border-radius: 0;
-  height: .7rem;
-}
-
-.skill-mf .progress .progress-bar {
-  height: .7rem;
-  background-color: #ffbd39;
-}
-
-
-/* Animation styles */
-#typing-animation {
-  position: relative;
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3s steps(20, end) infinite;
-}
-
-#typing-animation:before {
-  content: "";
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: #ccc;
-  animation: typing-cursor 0.5s ease-in-out infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg:#050810;
+    --bg2:#0a0f1e;
+    --accent:#6c63ff;
+    --accent2:#00d4aa;
+    --accent3:#ff6584;
+    --text:#e8eaf6;
+    --muted:#8892b0;
+    --card:#0d1226;
+    --border:rgba(108,99,255,0.2);
   }
-  to {
-    width: 100%;
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Space Grotesk',sans-serif;
+    overflow-x:hidden;
+    cursor:none;
   }
-}
-
-@keyframes typing-cursor {
-  from {
-    width: 5px;
+  #cursor{
+    position:fixed;width:12px;height:12px;
+    background:var(--accent);border-radius:50%;
+    pointer-events:none;z-index:9999;
+    transform:translate(-50%,-50%);
+    transition:transform 0.1s,width 0.3s,height 0.3s,background 0.3s;
+    mix-blend-mode:screen;
   }
-  to {
-    width: 0;
+  #cursor-ring{
+    position:fixed;width:40px;height:40px;
+    border:1px solid rgba(108,99,255,0.5);border-radius:50%;
+    pointer-events:none;z-index:9998;
+    transform:translate(-50%,-50%);
+    transition:transform 0.15s ease-out,width 0.3s,height 0.3s;
   }
-}
-
-
-/* project image zoom effect */
-
-.zoom-effect {
-  overflow: hidden;
-  transition: transform 0.3s ease-out;
-}
-
-.zoom-effect:hover {
-  transform: scale(1.1);
-}
-
-
+  #hero-canvas{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    z-index:0;pointer-events:none;
+  }
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:1.5rem 4rem;
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(5,8,16,0.8);
+    backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-logo{
+    font-family:'Syne',sans-serif;
+    font-size:1.4rem;font-weight:800;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    letter-spacing:-0.02em;
+  }
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{
+    color:var(--muted);text-decoration:none;
+    font-size:0.85rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;
+    transition:color 0.3s;position:relative;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;
+    background:var(--accent);transition:width 0.3s;
+  }
+  .nav-links a:hover{color:var(--text)}
+  .nav-links a:hover::after{width:100%}
+  section{position:relative;z-index:10}
+  #hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding:0 4rem;overflow:hidden;
+  }
+  .hero-content{max-width:700px}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(108,99,255,0.1);border:1px solid var(--border);
+    border-radius:100px;padding:6px 16px;
+    font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:2rem;
+    opacity:0;transform:translateY(20px);
+  }
+  .tag-dot{width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.5)}}
+  .hero-name{
+    font-family:'Syne',sans-serif;
+    font-size:clamp(3rem,7vw,5.5rem);
+    font-weight:800;line-height:0.95;
+    letter-spacing:-0.03em;
+    margin-bottom:1rem;
+    opacity:0;transform:translateY(40px);
+  }
+  .hero-name span{
+    display:block;
+    background:linear-gradient(135deg,#fff 0%,var(--accent) 50%,var(--accent2) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero-title{
+    font-size:1.1rem;color:var(--accent2);font-weight:500;
+    letter-spacing:0.02em;margin-bottom:1.5rem;
+    opacity:0;transform:translateY(20px);
+  }
+  .hero-desc{
+    font-size:1rem;color:var(--muted);line-height:1.8;
+    max-width:560px;margin-bottom:2.5rem;
+    opacity:0;transform:translateY(20px);
+  }
+  .hero-btns{
+    display:flex;gap:1rem;flex-wrap:wrap;
+    opacity:0;transform:translateY(20px);
+  }
+  .btn-primary{
+    padding:14px 32px;background:var(--accent);
+    color:#fff;border:none;border-radius:8px;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:0.9rem;font-weight:600;cursor:pointer;
+    transition:all 0.3s;position:relative;overflow:hidden;
+  }
+  .btn-primary::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    opacity:0;transition:opacity 0.3s;
+  }
+  .btn-primary:hover::before{opacity:1}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(108,99,255,0.4)}
+  .btn-primary span{position:relative;z-index:1}
+  .btn-outline{
+    padding:14px 32px;background:transparent;
+    color:var(--text);border:1px solid var(--border);border-radius:8px;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:0.9rem;font-weight:500;cursor:pointer;
+    transition:all 0.3s;
+  }
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .hero-scroll{
+    position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    color:var(--muted);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;
+    opacity:0;
+  }
+  .scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s ease-in-out infinite}
+  @keyframes scrollLine{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(0.5);opacity:0.5}}
+  .floating-badges{
+    position:absolute;right:4rem;top:50%;transform:translateY(-50%);
+    display:flex;flex-direction:column;gap:1rem;
+    opacity:0;
+  }
+  .badge{
+    background:rgba(13,18,38,0.9);border:1px solid var(--border);
+    border-radius:12px;padding:12px 20px;
+    display:flex;align-items:center;gap:10px;
+    backdrop-filter:blur(20px);
+    animation:float 4s ease-in-out infinite;
+  }
+  .badge:nth-child(2){animation-delay:1s}
+  .badge:nth-child(3){animation-delay:2s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .badge-icon{font-size:1.5rem}
+  .badge-text{font-size:0.8rem;font-weight:600;color:var(--text)}
+  .badge-sub{font-size:0.7rem;color:var(--muted)}
+  #about,#projects,#skills,#experience,#contact{
+    padding:6rem 4rem;
+  }
+  .section-label{
+    font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--accent);font-weight:600;margin-bottom:0.75rem;
+    opacity:0;transform:translateX(-20px);
+  }
+  .section-title{
+    font-family:'Syne',sans-serif;
+    font-size:clamp(2rem,4vw,3.5rem);font-weight:800;
+    letter-spacing:-0.02em;line-height:1.1;
+    margin-bottom:3rem;
+    opacity:0;transform:translateY(30px);
+  }
+  .section-title span{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .about-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;
+  }
+  .about-text p{
+    color:var(--muted);line-height:1.9;font-size:1rem;margin-bottom:1.5rem;
+    opacity:0;transform:translateY(20px);
+  }
+  .stats-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;
+    opacity:0;transform:translateY(30px);
+  }
+  .stat-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:16px;padding:2rem;text-align:center;
+    transition:all 0.4s;position:relative;overflow:hidden;
+  }
+  .stat-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(108,99,255,0.05),transparent);
+    opacity:0;transition:opacity 0.4s;
+  }
+  .stat-card:hover{transform:translateY(-6px);border-color:rgba(108,99,255,0.5);box-shadow:0 20px 60px rgba(108,99,255,0.15)}
+  .stat-card:hover::before{opacity:1}
+  .stat-num{
+    font-family:'Syne',sans-serif;font-size:2.5rem;font-weight:800;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    display:block;margin-bottom:0.25rem;
+  }
+  .stat-label{font-size:0.8rem;color:var(--muted);font-weight:500}
+  .projects-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2rem;
+  }
+  .project-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:20px;padding:2rem;
+    transition:all 0.4s cubic-bezier(0.23,1,0.32,1);
+    position:relative;overflow:hidden;
+    opacity:0;transform:translateY(40px);
+  }
+  .project-card::before{
+    content:'';position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2),var(--accent3));
+    border-radius:22px;z-index:-1;opacity:0;transition:opacity 0.4s;
+  }
+  .project-card:hover{transform:translateY(-10px) scale(1.01);box-shadow:0 30px 80px rgba(0,0,0,0.5)}
+  .project-card:hover::before{opacity:1}
+  .project-num{
+    font-family:'Syne',sans-serif;font-size:0.7rem;
+    color:var(--accent);letter-spacing:0.15em;margin-bottom:1rem;font-weight:700;
+  }
+  .project-title{
+    font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:700;
+    margin-bottom:0.75rem;
+  }
+  .project-desc{font-size:0.88rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+  .project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+  .tag{
+    padding:5px 12px;border-radius:100px;
+    background:rgba(108,99,255,0.1);border:1px solid rgba(108,99,255,0.3);
+    font-size:0.72rem;color:var(--accent);font-weight:500;
+  }
+  .tag.green{background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.3);color:var(--accent2)}
+  .tag.pink{background:rgba(255,101,132,0.1);border-color:rgba(255,101,132,0.3);color:var(--accent3)}
+  .project-link{
+    display:inline-flex;align-items:center;gap:6px;
+    color:var(--accent);font-size:0.85rem;font-weight:600;text-decoration:none;
+    transition:gap 0.3s;
+  }
+  .project-link:hover{gap:10px}
+  .project-feat{
+    position:absolute;top:1.5rem;right:1.5rem;
+    background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.3);
+    border-radius:100px;padding:4px 12px;
+    font-size:0.65rem;letter-spacing:0.1em;color:var(--accent2);font-weight:600;text-transform:uppercase;
+  }
+  .project-highlights{
+    border-top:1px solid var(--border);padding-top:1rem;margin-top:1rem;
+  }
+  .highlight{
+    display:flex;align-items:start;gap:8px;margin-bottom:8px;
+    font-size:0.82rem;color:var(--muted);line-height:1.5;
+  }
+  .highlight::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:1px}
+  .skills-section{background:var(--bg2)}
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;
+  }
+  .skill-category{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:16px;padding:1.75rem;
+    opacity:0;transform:translateY(30px);
+    transition:all 0.3s;
+  }
+  .skill-category:hover{border-color:rgba(108,99,255,0.4);transform:translateY(-4px)}
+  .cat-title{
+    font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin-bottom:1.25rem;
+    display:flex;align-items:center;gap:8px;
+  }
+  .cat-title::before{content:'';width:24px;height:2px;background:linear-gradient(to right,var(--accent),var(--accent2));border-radius:2px}
+  .skill-items{display:flex;flex-wrap:wrap;gap:8px}
+  .skill-pill{
+    padding:8px 16px;border-radius:8px;
+    background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+    font-size:0.83rem;font-weight:500;color:var(--text);
+    transition:all 0.3s;cursor:default;
+  }
+  .skill-pill:hover{background:rgba(108,99,255,0.15);border-color:rgba(108,99,255,0.4);color:var(--accent);transform:translateY(-2px)}
+  .experience-timeline{max-width:800px;margin:0 auto;position:relative}
+  .timeline-line{
+    position:absolute;left:24px;top:0;bottom:0;
+    width:1px;background:linear-gradient(to bottom,var(--accent),transparent);
+  }
+  .exp-item{
+    padding-left:72px;margin-bottom:3rem;position:relative;
+    opacity:0;transform:translateX(-30px);
+  }
+  .exp-dot{
+    position:absolute;left:16px;top:8px;
+    width:18px;height:18px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    border:3px solid var(--bg);
+    box-shadow:0 0 20px rgba(108,99,255,0.5);
+  }
+  .exp-date{
+    font-size:0.75rem;letter-spacing:0.1em;color:var(--accent);
+    text-transform:uppercase;font-weight:600;margin-bottom:0.5rem;
+  }
+  .exp-role{
+    font-family:'Syne',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:0.25rem;
+  }
+  .exp-company{
+    font-size:0.9rem;color:var(--accent2);font-weight:500;margin-bottom:1rem;
+  }
+  .exp-points{list-style:none}
+  .exp-points li{
+    color:var(--muted);font-size:0.88rem;line-height:1.7;
+    padding:4px 0;padding-left:16px;position:relative;
+  }
+  .exp-points li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+  #contact{background:var(--bg2);text-align:center}
+  .contact-card{
+    max-width:640px;margin:0 auto;
+    background:var(--card);border:1px solid var(--border);
+    border-radius:24px;padding:3.5rem;
+    position:relative;overflow:hidden;
+    opacity:0;transform:translateY(40px);
+  }
+  .contact-card::before{
+    content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+    background:radial-gradient(ellipse at center,rgba(108,99,255,0.06),transparent 70%);
+    animation:rotate 20s linear infinite;
+  }
+  @keyframes rotate{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  .contact-email{
+    font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    margin:1.5rem 0;display:block;
+  }
+  .contact-links{display:flex;justify-content:center;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+  .contact-link{
+    padding:12px 24px;border:1px solid var(--border);border-radius:8px;
+    color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:500;
+    transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .contact-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+  footer{
+    text-align:center;padding:2rem;border-top:1px solid var(--border);
+    color:var(--muted);font-size:0.8rem;
+  }
+  .glow-orb{
+    position:fixed;pointer-events:none;border-radius:50%;filter:blur(80px);z-index:1;
+    transition:all 0.3s ease;
+  }
+  #orb1{width:400px;height:400px;background:rgba(108,99,255,0.12);top:-100px;right:-100px}
+  #orb2{width:300px;height:300px;background:rgba(0,212,170,0.08);bottom:-50px;left:-50px}
+  .nav-dot{
+    display:inline-block;width:6px;height:6px;
+    background:var(--accent2);border-radius:50%;
+    margin-right:8px;animation:pulse 2s infinite;
+  }
 </style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="hero-canvas"></canvas>
+<div class="glow-orb" id="orb1"></div>
+<div class="glow-orb" id="orb2"></div>
 
+<nav>
+  <div class="nav-logo">YSN</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
 
-  </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Yogendra Singh Negi</a>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-tag"><span class="tag-dot"></span>Available for opportunities</div>
+    <h1 class="hero-name">
+      <span>Yogendra</span>
+      <span>Singh Negi</span>
+    </h1>
+    <div class="hero-title">AI Engineer · SaaS Builder · Full-Stack Dev</div>
+    <p class="hero-desc">Building intelligent web experiences at the intersection of AI and full-stack engineering. I craft scalable SaaS platforms powered by LLMs that solve real problems.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})"><span>View My Work</span></button>
+      <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get In Touch</button>
+    </div>
+  </div>
+  <div class="floating-badges">
+    <div class="badge"><div class="badge-icon">🤖</div><div><div class="badge-text">AI Integration</div><div class="badge-sub">Gemini · Groq · Claude</div></div></div>
+    <div class="badge"><div class="badge-icon">⚡</div><div><div class="badge-text">Full-Stack</div><div class="badge-sub">Next.js · Node · React</div></div></div>
+    <div class="badge"><div class="badge-icon">🚀</div><div><div class="badge-text">SaaS Builder</div><div class="badge-sub">Production Ready</div></div></div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
 
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
-	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
-	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-	  <section id="home-section" class="hero">
-		  <div class="home-slider  owl-carousel">
-	       <div class="slider-item ">
-	      	<div class="overlay"></div>
-	         <div class="container">
-	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(img.jpg);">
-	          	 <div class="overlay"></div>
-	          	</div>
-		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Hello!</span>
-			            <h1 class="mb-4 mt-3">I'm <span>Yogendra Singh Negi</span></h1>
+<section id="about">
+  <div class="section-label">About Me</div>
+  <div class="section-title">Building the <span>Future</span><br>with AI & Code</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm an AI-focused Software Engineer from Kanpur, India — passionate about building products that leverage the power of large language models to create meaningful, real-world impact.</p>
+      <p>I recently graduated with a B.Tech in Computer Science from Pranveer Singh Institute of Technology (2025) and am currently working at BTPS Technologies as a Software Developer building scalable web applications.</p>
+      <p>From architecting full-stack SaaS platforms to fine-tuning prompt logic for AI APIs, I thrive at the intersection of engineering precision and creative problem-solving.</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><span class="stat-num">3+</span><div class="stat-label">AI APIs Integrated</div></div>
+      <div class="stat-card"><span class="stat-num">₹199</span><div class="stat-label">SaaS Subscription Built</div></div>
+      <div class="stat-card"><span class="stat-num">₹1.5K</span><div class="stat-label">Monthly Infra Cost</div></div>
+      <div class="stat-card"><span class="stat-num">2025</span><div class="stat-label">B.Tech Graduate</div></div>
+    </div>
+  </div>
+</section>
 
-						<!-- Element to contain animated typing -->
-						<span id="typing-animation"></span>
-
-						<script>
-
-						// Initialize the typing animation
-						const typingAnimationElement = document.getElementById('typing-animation');
-
-						// Create an array of typing text
-						const typingTexts = [
-						'Computer Science Student  '];
-
-						// Create a function to display the typing animation for a given text
-						function playTypingAnimation(text) {
-						// Loop through each character and add it to the element
-						for (let i = 0; i < text.length; i++) {
-							setTimeout(() => {
-							typingAnimationElement.textContent += text[i];
-							}, i * 200); // Increase the delay to slow down the typing animation
-						}
-
-						// Once the animation is complete, reset the text and start over
-						setTimeout(() => {
-							typingAnimationElement.textContent = '';
-							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 2) % typingTexts.length]);
-						}, text.length * 200);
-						}
-
-						// Start the typing animation loop
-						playTypingAnimation(typingTexts[0]);
-
-						</script>
-
-						<br>
-						<br>
-			            <h2> Final Year Student</h2>
-						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
-						<!-- <br> -->
-			            <p>
-							<a href="https://github.com/negicodes" class="btn btn-primary py-3 px-4">My works</a></p>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-		</div>
-    </section>
-
-
-
-    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
-    	<div class="container">
-			<div class="row">
-				<div class="row d-flex align-items-stretch">
-				<!-- <div class="row d-flex"> -->
-					<div class="col-md-6 col-lg-5 d-flex">
-						<div class="img-about img d-flex align-items-stretch">
-							<div class="overlay">
-								<div class="row">
-									<div class="col-sm-6 col-md-5">
-									  <div class="about-img">
-										<img src="img.jpg" class="img-fluid rounded b-shadow-a" alt="">
-									  </div>
-									</div>
-									<!-- Details next to profile image -->
-									<div class="col-sm-6 col-md-7">
-									  <div class="about-info">
-										<p><span class="title-s">Name: </span> <span>Yogendra Singh Negi</span></p>
-										<p><span class="title-s"></span> <span> Computer Science Student</span></p>
-										<p><span class="title-s">Experience: </span> <span>Fresher</span></p>
-										<p><span class="title-s">Address: </span> <span> Kanpur,Uttar Pradesh</span></p>
-									  </div>
-									</div>
-								  </div>
-
-								<div class="skill-mf">
-									<p class="title-s">Skills</p>
-									<span>SQL</span> <span class="pull-right">95%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>PYTHON</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Data Visualization</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Statistical Analysis</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Machine Learning</span> <span class="pull-right"></span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
-						<div class="row justify-content-start pb-3">
-							<div class="col-md-12 heading-section ftco-animate">
-								
-								<h1 class="big">About</h1>
-								<h2 class="mb-4">About Me</h2>
-								
-								<p>Final year student of B. Tech in Computer Science and Engineering from Pranveer Singh Institute of Technology. I am highly motivated to work in a tech-driven environment and am actively seeking an internship and Job in the field of Tech Industry. My knowledge of coding and problem solving skills make me a perfect candidate for the job. Additionally, I have experience in machines learning &amp; Data Visualization like Power BI . I possess excellent communication and interpersonal skills which helps me to work in teams effectively. I am an ambitious individual who is always looking to learn and grow in the world of technology.</p>
-								<ul class="about-info mt-4 px-md-0 px-2">
-									<li class="d-flex"><span>Profile:</span> <span> Student/Fresher </span></li>
-									<li class="d-flex"><span>Domain:</span> <span> Computer Science</span></li>
-									<li class="d-flex"><span>Education:</span> <span>Bachelor of Engineering</span></li>
-									<li class="d-flex"><span>Language:</span> <span>English, Hindi</span></li>
-									<li class="d-flex"><span>BI Tools:</span> <span>Microsoft Power BI  &amp; Tableau</span></li>
-									<li class="d-flex"><span>Other Skills:</span> <span>Pandas, Numpy, Matplotlib, Excel, MySQL , Mongo DB , Tensorflow, NLTK  &amp; DeepFace</span></li>
-									<li class="d-flex"><span>Interest:</span> <span>Power Lifting , Growth Hacking , Traveling </span></li>
-									
-								</ul>
-							</div>
-						</div>
-
-
-						<div class="counter-wrap ftco-animate d-flex mt-md-3">
-							<div class="text">
-								<p class="mb-4">
-									<span class="number" data-number="10">0</span> <span>+</span>
-									<span>&nbsp; Projects completed</span>
-								</p>
-								<p><a href="https://www.linkedin.com/in/negicodes/" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-    </section>
-
-
-
-	
-    <section class="ftco-section ftco-no-pb" id="resume-section">
-    	<div class="container">
-    		<div class="row justify-content-center pb-5">
-          <div class="col-md-10 heading-section text-center ftco-animate">
-          	<h1 class="big big-2">Resume</h1>
-            <h2 class="mb-4">Resume</h2>
-            <p>Experience driving business strategies through data-driven insights ,Data Science, Statistical Analysis, Machine Learning and Data Analytics.</p>
-          </div>
-        </div>
-
-		<div class="row">
-			<h1 class="big-4">Experience / Internship</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-		<div class="row">
-				<div class="col-md-6">
-					<div class="resume-wrap ftco-animate">
-						<span class="date">2024 April - 2024 May</span>
-						<h2>Machine Learning Intern</h2>
-						<span class="position">Navodita InfoTech</span>
-						<p class="mt-4">Company is about innovation, expertise, and dedication, help businesses of all sizes navigate the complex world of IT and achieve their goals.
-							<ul>
-								<li> Significantly enhanced technical skills through practical application</li>
-								<li>Developed Health Care Model with an accuracy of 90+ percent based on 1lakh+ datasets</li>
-							</ul>
-						</p>
-					</div>
-
-				</div>
-			</div>
-
-		<br>
-		<br>
-
-		<div class="row">
-			<h1 class="big-4">Education</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-			<div class="row">
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<span class="date">2021-Present</span>
-    					<h2>Bachelor of Technology</h2>
-    					<span class="position">Pranveer Singh Institute of Technology</span>
-    					
-    				</div>
-    			</div>
-
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<span class="date">2018-2019</span>
-    					<h2>High School</h2>
-    					<span class="position">Karam Devi Memorial Academy</span>
-    					
-    				</div>
-				</div>
-				<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<span class="date">2020-2021</span>
-    					<h2>Intermediate School</h2>
-    					<span class="position">Karam Devi Memorial Academy</span>
-    				</div>
-				</div>
-
-    		</div>
-
-    		<div class="row justify-content-center mt-5">
-    			<div class="col-md-6 text-center ftco-animate">
-    				<p><a href="https://drive.google.com/file/d/1GFzIw_UXTpmWUwnTPtruc1Xlxeo0NJgQ/view?usp=sharing" class="btn btn-primary py-4 px-5">Download CV</a></p>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-
-   
-
-    <section class="ftco-section" id="project-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Projects</h1>
-            <h2 class="mb-4">Projects</h2>
-            <p>My Few projects on SQL, Python, Power BI , ML & DL.</p>
-          </div>
-        </div>
-        <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/viditpandey06/HiveMind" class="block-20 zoom-effect" style="background-image: url('hive123.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/viditpandey06/HiveMind">HIVEMIND a Social Media Platform</a></h3>
-                <p>Content filteration with help of real time face analysis with no sensitive data retention</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/negicodes/survivalprediction" class="block-20 zoom-effect" style="background-image: url('spmodel.png');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/negicodes/survivalprediction">Survival Prediction Model</a></h3>
-                <p>Discrete-time survival models are applied to a person-period data set to predict the hazard of experiencing the failure event in pre-specified time intervals</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="https://github.com/negicodes/Store-Dashboard-Analysis" class="block-20 zoom-effect" style="background-image: url('Powerbi.png');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/negicodes/Store-Dashboard-Analysis">Power BI Store Sales Dashboard</a></h3>
-                <p>Incorporated data analysis techniques to deliver valuable insights and interactive dashboard creation, driving business success</p>
-              </div>
-            </div>
-          </div>
-        </div>
-	<br>
-		<!-- added justify-content-center to center align the last two projects -->
-		<!-- <div class="row d-flex justify-content-center">  
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main" class="block-20 zoom-effect" style="background-image: url('images/proj_4.jpg');">
-				</a>
-				<div class="text mt-3 float-right d-block">
-  
-				  <h3 class="heading"><a href="https://github.com/rishabhnmishra/sales_forecasting/tree/main">Sales Forecast- Time Series Forecasting</a></h3>
-				  <p>Used multiple machine learning models to forecast sales (retail store) and performed time series analysis.</p>
-				</div>
-			  </div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/rishabhnmishra/customer_segmentation/blob/main/Customer_Segmentation-final.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_5.jpg');">
-				</a>
-				
-			  </div>
-			</div>
-		 </div> -->
-	  </div>
-    </section>
-
-	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
-      <div class="container">
-		<div class="row d-md-flex align-items-center">
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="20">0</strong>
-                <span>Achievements &amp; Certification</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="10">+</strong>
-                <span>Projects</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="10">0</strong>
-                <span>EA Sports Tournament Organizer</span>
-              </div>
-            </div>
-          </div>
-        </div>
+<section id="projects">
+  <div class="section-label">Selected Work</div>
+  <div class="section-title">Projects That <span>Ship</span></div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-feat">Featured</div>
+      <div class="project-num">01 / PROJECT</div>
+      <h3 class="project-title">DexterDome</h3>
+      <p class="project-desc">AI-powered career SaaS platform offering resume analysis, ATS optimization, cover letter generation, and interview prep.</p>
+      <div class="project-tags">
+        <span class="tag">Next.js</span><span class="tag">React</span>
+        <span class="tag green">Gemini 2.0</span><span class="tag green">Groq</span>
+        <span class="tag pink">Railway</span>
       </div>
-	
-	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
-			<!-- <div class="container"> -->
-				<div class="row justify-content-center">
-					<div class="col-md-7 ftco-animate text-center">
-						<h2>More projects on<span> Github  </span> </h2>
-						<div class="heading"> <h4> I love to solve business problems &amp; uncover hidden data stories </h4>
-						<br>
-						<p><a href="https://github.com/negicodes/" class="btn btn-primary py-3 px-5">GitHub</a></p>
-						</div>
-					</div>
-				</div>
-			<!-- </div> -->
-		</div>
-	</section>
+      <div class="project-highlights">
+        <div class="highlight">Sub-second AI response times via optimized prompt routing</div>
+        <div class="highlight">Tiered SaaS model (Free / Pro at ₹199/month) with feature gating</div>
+        <div class="highlight">Infrastructure cost reduced to under ₹1,500/month</div>
+        <div class="highlight">Real-time resume scoring with Gemini 2.0 Flash</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02 / PROJECT</div>
+      <h3 class="project-title">CODEFIT.AI</h3>
+      <p class="project-desc">AI fitness coaching web app featuring an interactive chatbot and virtual assistant for personalized workout guidance.</p>
+      <div class="project-tags">
+        <span class="tag">HTML/CSS/JS</span>
+        <span class="tag green">Gemini API</span>
+        <span class="tag pink">Netlify</span>
+      </div>
+      <div class="project-highlights">
+        <div class="highlight">Google Gemini API for AI-driven workout recommendations</div>
+        <div class="highlight">Optimized prompt logic for relevant fitness responses</div>
+        <div class="highlight">Desktop-first interactive chatbot experience</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03 / PROJECT</div>
+      <h3 class="project-title">Survival Prediction Model</h3>
+      <p class="project-desc">Machine learning model for predicting survival outcomes, reducing manual analysis and enabling data-driven decisions.</p>
+      <div class="project-tags">
+        <span class="tag">TensorFlow</span><span class="tag">Pandas</span>
+        <span class="tag">NumPy</span><span class="tag green">Matplotlib</span>
+      </div>
+      <div class="project-highlights">
+        <div class="highlight">Applied feature selection and hyperparameter tuning</div>
+        <div class="highlight">Improved model robustness and predictive accuracy</div>
+        <div class="highlight">Data-driven decision support system</div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="skills" class="skills-section">
+  <div class="section-label">Technical Stack</div>
+  <div class="section-title">Tools I <span>Wield</span></div>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <div class="cat-title">Languages</div>
+      <div class="skill-items">
+        <span class="skill-pill">Java</span>
+        <span class="skill-pill">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="cat-title">Frontend</div>
+      <div class="skill-items">
+        <span class="skill-pill">React.js</span>
+        <span class="skill-pill">Next.js</span>
+        <span class="skill-pill">HTML</span>
+        <span class="skill-pill">CSS</span>
+        <span class="skill-pill">Tailwind CSS</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="cat-title">Backend</div>
+      <div class="skill-items">
+        <span class="skill-pill">Node.js</span>
+        <span class="skill-pill">Express.js</span>
+        <span class="skill-pill">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="cat-title">AI / LLM</div>
+      <div class="skill-items">
+        <span class="skill-pill">Prompt Engineering</span>
+        <span class="skill-pill">Claude API</span>
+        <span class="skill-pill">Gemini API</span>
+        <span class="skill-pill">Groq API</span>
+        <span class="skill-pill">OpenRouter</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="cat-title">Databases</div>
+      <div class="skill-items">
+        <span class="skill-pill">MySQL</span>
+        <span class="skill-pill">MongoDB</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="cat-title">DevOps & Tools</div>
+      <div class="skill-items">
+        <span class="skill-pill">GitHub</span>
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">Railway</span>
+        <span class="skill-pill">Netlify</span>
+        <span class="skill-pill">Vercel</span>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <div class="section-title">Where I've <span>Built</span></div>
+  <div class="experience-timeline">
+    <div class="timeline-line"></div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-date">April 2025 – Present</div>
+      <div class="exp-role">Software Developer</div>
+      <div class="exp-company">BTPS Technologies · Kanpur, India</div>
+      <ul class="exp-points">
+        <li>Developed scalable web application features with Node.js, Express.js, and React/Next.js in production</li>
+        <li>Built and integrated RESTful APIs for data processing, authentication, and backend communication</li>
+        <li>Improved application performance through optimized API handling and asynchronous operations</li>
+        <li>Collaborated on responsive frontend interfaces to enhance user experience and reliability</li>
+      </ul>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot" style="background:linear-gradient(135deg,#00d4aa,#6c63ff)"></div>
+      <div class="exp-date">2021 – 2025</div>
+      <div class="exp-role">B.Tech — Computer Science</div>
+      <div class="exp-company">Pranveer Singh Institute of Technology · Kanpur</div>
+      <ul class="exp-points">
+        <li>Specialized in AI/ML, full-stack web development, and software engineering</li>
+        <li>Built multiple production projects integrating LLMs and modern web frameworks</li>
+        <li>Developed expertise in scalable SaaS architecture and cloud deployments</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Contact</h1>
-            <h2 class="mb-4">Contact Me</h2>
-            <p>Below are the details to reach out to me!</p>
-          </div>
-        </div>
+<section id="contact">
+  <div class="section-label">Let's Talk</div>
+  <div class="section-title">Ready to <span>Build</span><br>Something Great?</div>
+  <div class="contact-card">
+    <p style="color:var(--muted);font-size:0.95rem;line-height:1.7;position:relative;z-index:1">I'm actively looking for new opportunities where I can build AI-powered products and scalable systems. Drop me a message — I respond fast.</p>
+    <a class="contact-email" href="mailto:30815csai@gmail.com" style="position:relative;z-index:1">30815csai@gmail.com</a>
+    <div style="color:var(--muted);font-size:0.85rem;position:relative;z-index:1">📍 Kanpur, Uttar Pradesh · 📞 +91-6387743566</div>
+    <div class="contact-links" style="position:relative;z-index:1">
+      <a class="contact-link" href="#">⚡ LinkedIn</a>
+      <a class="contact-link" href="#">💻 GitHub</a>
+      <a class="contact-link" href="#">📄 Resume</a>
+    </div>
+  </div>
+</section>
 
-        <div class="row d-flex contact-info mb-5">
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Address</h3>
-	            <p>79/8 Vijay Nagar , Kanpur, Uttar Pradesh, India</p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-phone2"></span>
-          		</div>
-          		<h3 class="mb-4">Contact Number</h3>
-	            <p><a href="tel:6387743566">6387743566</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-paper-plane"></span>
-          		</div>
-          		<h3 class="mb-4">Email Address</h3>
-	            <p><a href="mailto:negiyogendra4339@gmail.com">negiyogendra4339@gmail.com</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-globe"></span>
-          		</div>
-          		<h3 class="mb-4">Download Resume</h3>
-	            <p><a href="https://drive.google.com/file/d/1GFzIw_UXTpmWUwnTPtruc1Xlxeo0NJgQ/view?usp=sharing">ResumeLink</a></p>
-	          </div>
-          </div>
+<footer>
+  <p>Designed & built by <strong>Yogendra Singh Negi</strong> · 2025</p>
+</footer>
 
-		  <div class="container">
-			<br>
-			<br>
-			
-				<br>
-					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
-					  <li class="ftco-animate normal-txt">Find me on  </li>
-					  
-					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/negicodes/"><span class="icon-linkedin"></span></a></li>  
-					  <li class="ftco-animate"><a href=""><span class="icon-twitter"></span></a></li>
-					  
-				      <li class="ftco-animate"><a href="https://www.instagram.com/y_s_negi/"><span class="icon-instagram"></span></a></li>
-					</ul>
-				<br>
-		   </div>
-   </div>
- </section>
+<script>
+// Custom cursor
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}animRing();
+document.querySelectorAll('a,button,.project-card,.skill-pill,.stat-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';ring.style.width='60px';ring.style.height='60px'});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';ring.style.width='40px';ring.style.height='40px'});
+});
 
+// Three.js particle field
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('hero-canvas'),alpha:true,antialias:true});
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth,window.innerHeight);
+camera.position.z=30;
 
- 
-	
-    <footer class="ftco-footer ftco-section">
-		<div class="container">
-		  <div class="row">
-			<div class="col-md-12 text-center">
-  
-			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-			</div>
-		  </div>
-		</div>
-	  </footer>
+// Particles
+const particleCount=1800;
+const positions=new Float32Array(particleCount*3);
+const colors=new Float32Array(particleCount*3);
+const sizes=new Float32Array(particleCount);
+for(let i=0;i<particleCount;i++){
+  positions[i*3]=(Math.random()-0.5)*120;
+  positions[i*3+1]=(Math.random()-0.5)*80;
+  positions[i*3+2]=(Math.random()-0.5)*60;
+  const t=Math.random();
+  if(t<0.4){colors[i*3]=0.42;colors[i*3+1]=0.39;colors[i*3+2]=1}
+  else if(t<0.7){colors[i*3]=0;colors[i*3+1]=0.83;colors[i*3+2]=0.67}
+  else{colors[i*3]=1;colors[i*3+1]=0.4;colors[i*3+2]=0.51}
+  sizes[i]=Math.random()*2+0.5;
+}
+const geo=new THREE.BufferGeometry();
+geo.setAttribute('position',new THREE.BufferAttribute(positions,3));
+geo.setAttribute('color',new THREE.BufferAttribute(colors,3));
+geo.setAttribute('size',new THREE.BufferAttribute(sizes,1));
+const mat=new THREE.PointsMaterial({size:0.4,vertexColors:true,transparent:true,opacity:0.7,sizeAttenuation:true});
+const points=new THREE.Points(geo,mat);
+scene.add(points);
 
+// Floating geometric shapes
+const shapes=[];
+const geoms=[new THREE.TetrahedronGeometry(1.5),new THREE.OctahedronGeometry(1.2),new THREE.IcosahedronGeometry(1)];
+const shapeMat=new THREE.MeshBasicMaterial({color:0x6c63ff,wireframe:true,transparent:true,opacity:0.15});
+for(let i=0;i<12;i++){
+  const mesh=new THREE.Mesh(geoms[i%3],new THREE.MeshBasicMaterial({color:i%3===0?0x6c63ff:i%3===1?0x00d4aa:0xff6584,wireframe:true,transparent:true,opacity:0.1+Math.random()*0.1}));
+  mesh.position.set((Math.random()-0.5)*80,(Math.random()-0.5)*50,(Math.random()-0.5)*30);
+  mesh.userData={speed:Math.random()*0.005+0.002,axis:new THREE.Vector3(Math.random(),Math.random(),Math.random()).normalize()};
+  shapes.push(mesh);scene.add(mesh);
+}
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+// Connection lines
+function createConnections(){
+  const lineMat=new THREE.LineBasicMaterial({color:0x6c63ff,transparent:true,opacity:0.05});
+  for(let i=0;i<30;i++){
+    const a=Math.floor(Math.random()*particleCount)*3;
+    const b=Math.floor(Math.random()*particleCount)*3;
+    const lGeo=new THREE.BufferGeometry().setFromPoints([
+      new THREE.Vector3(positions[a],positions[a+1],positions[a+2]),
+      new THREE.Vector3(positions[b],positions[b+1],positions[b+2])
+    ]);
+    scene.add(new THREE.Line(lGeo,lineMat));
+  }
+}createConnections();
 
+let mouseX=0,mouseY=0;
+document.addEventListener('mousemove',e=>{mouseX=(e.clientX/window.innerWidth-0.5)*2;mouseY=(e.clientY/window.innerHeight-0.5)*2});
+window.addEventListener('resize',()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight)});
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  
-  <script src="js/main.js"></script>
-    
-  </body>
+let t=0;
+function animate(){
+  requestAnimationFrame(animate);t+=0.003;
+  points.rotation.y=t*0.08+mouseX*0.1;
+  points.rotation.x=t*0.04+mouseY*0.05;
+  shapes.forEach(s=>{s.rotateOnAxis(s.userData.axis,s.userData.speed);s.position.y+=Math.sin(t+s.position.x)*0.02});
+  const pos=geo.attributes.position.array;
+  for(let i=1;i<particleCount*3;i+=3){pos[i]+=Math.sin(t+pos[i-1]*0.1)*0.015}
+  geo.attributes.position.needsUpdate=true;
+  renderer.render(scene,camera);
+}animate();
+
+// GSAP animations
+gsap.registerPlugin(ScrollTrigger);
+// Hero
+gsap.to('.hero-tag',{opacity:1,y:0,duration:0.8,delay:0.3,ease:'power3.out'});
+gsap.to('.hero-name',{opacity:1,y:0,duration:1,delay:0.5,ease:'power3.out'});
+gsap.to('.hero-title',{opacity:1,y:0,duration:0.8,delay:0.7,ease:'power3.out'});
+gsap.to('.hero-desc',{opacity:1,y:0,duration:0.8,delay:0.9,ease:'power3.out'});
+gsap.to('.hero-btns',{opacity:1,y:0,duration:0.8,delay:1.1,ease:'power3.out'});
+gsap.to('.floating-badges',{opacity:1,duration:1,delay:1.4,ease:'power3.out'});
+gsap.to('.hero-scroll',{opacity:1,duration:1,delay:1.8,ease:'power3.out'});
+
+// Scroll animations
+const scrollFade=(sel,opts={})=>{
+  gsap.utils.toArray(sel).forEach((el,i)=>{
+    gsap.to(el,{opacity:1,y:0,x:0,duration:0.8,delay:i*0.1,...opts,scrollTrigger:{trigger:el,start:'top 85%',once:true}});
+  });
+};
+scrollFade('.section-label');scrollFade('.section-title');
+scrollFade('.about-text p');scrollFade('.stats-grid');
+scrollFade('.project-card');scrollFade('.skill-category');
+scrollFade('.exp-item');scrollFade('.contact-card');
+</script>
+</body>
 </html>
