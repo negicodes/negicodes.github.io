@@ -9,20 +9,23 @@
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --ink:    #0D0D0D;
-    --blue:   #1B4FFF;
-    --muted:  #6B7280;
-    --rule:   #E5E7EB;
-    --bg:     #FFFFFF;
-    --bg2:    #F9FAFB;
-    --tag-bg: #EEF2FF;
-    --tag-tx: #3B44C7;
+    --ink:    #F1F0EE;
+    --accent: #6366F1;
+    --blue:   #6366F1;
+    --muted:  #9094A0;
+    --rule:   #1E2030;
+    --bg:     #0F1117;
+    --bg2:    #151720;
+    --bg3:    #1A1D27;
+    --tag-bg: #1E2035;
+    --tag-tx: #A5B4FC;
   }
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--ink);
+    min-height: 100vh;
     font-size: 15px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -31,7 +34,7 @@
   nav {
     border-bottom: 1px solid var(--rule);
     position: sticky; top: 0;
-    background: rgba(255,255,255,0.92);
+    background: rgba(15,17,23,0.92);
     backdrop-filter: blur(10px);
     z-index: 50;
   }
@@ -52,6 +55,9 @@
   section { padding: 72px 0; border-bottom: 1px solid var(--rule); }
   section:last-of-type { border-bottom: none; }
   #hero { padding: 80px 0 72px; }
+  #hero .shell {
+    position: relative;
+  }
   .availability {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 0.75rem; font-weight: 500; color: #16A34A;
@@ -72,22 +78,27 @@
   }
   .stat-bar {
     display: flex; gap: 0; border: 1px solid var(--rule);
-    border-radius: 6px; overflow: hidden; margin-bottom: 32px; width: fit-content;
+    border-radius: 8px; overflow: hidden; margin-bottom: 32px; width: fit-content;
+    background: var(--bg2);
   }
-  .stat-item { padding: 10px 20px; border-right: 1px solid var(--rule); }
+  .stat-item { padding: 12px 22px; border-right: 1px solid var(--rule); position: relative; }
   .stat-item:last-child { border-right: none; }
-  .stat-val { font-size: 0.88rem; font-weight: 600; color: var(--ink); display: block; }
-  .stat-key { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .stat-item::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--accent); opacity: 0.6;
+  }
+  .stat-val { font-size: 1rem; font-weight: 700; color: var(--ink); display: block; letter-spacing: -0.01em; }
+  .stat-key { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-top: 2px; }
   .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
   .btn {
     display: inline-block; padding: 9px 20px; border-radius: 5px;
     font-size: 0.85rem; font-weight: 500; text-decoration: none; cursor: pointer;
     border: none; font-family: 'Inter', sans-serif; transition: all 0.18s;
   }
-  .btn-primary { background: var(--ink); color: #fff; }
-  .btn-primary:hover { background: #1a1a1a; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #4F52D4; box-shadow: 0 2px 20px rgba(99,102,241,0.35); }
   .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--rule); }
-  .btn-ghost:hover { color: var(--ink); border-color: #9CA3AF; }
+  .btn-ghost:hover { color: var(--ink); border-color: #6366F1; }
   .sec-label {
     font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--blue); margin-bottom: 28px;
@@ -105,7 +116,7 @@
     padding-left: 12px;
   }
   .project-item:hover {
-    border-left-color: var(--blue);
+    border-left-color: var(--accent);
     padding-left: 20px;
   }
   .project-item:first-child { padding-top: 0; }
@@ -133,7 +144,7 @@
   .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .ptag {
     font-size: 0.72rem; font-weight: 500; background: var(--bg2);
-    border: 1px solid var(--rule); color: #374151; padding: 3px 9px; border-radius: 4px;
+    border: 1px solid var(--rule); color: var(--tag-tx); padding: 3px 9px; border-radius: 4px;
   }
   .proj-link {
     font-size: 0.8rem; color: var(--blue); text-decoration: none;
@@ -143,11 +154,11 @@
   /* Screenshot styles */
   .proj-screenshot {
     margin: 14px 0 14px;
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--rule);
     max-width: 520px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
   }
   .proj-screenshot img {
     width: 100%;
@@ -157,7 +168,7 @@
   .skills-grid { display: grid; grid-template-columns: 120px 1fr; gap: 0; }
   .skill-row { display: contents; }
   .skill-row .sk-label, .skill-row .sk-vals {
-    padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 0.83rem;
+    padding: 13px 0; border-bottom: 1px solid var(--rule); font-size: 0.83rem;
   }
   .skill-row:last-child .sk-label, .skill-row:last-child .sk-vals { border-bottom: none; }
   .sk-label {
@@ -209,7 +220,7 @@
   .footer-quote {
     font-family: 'DM Serif Display', serif;
     font-size: 0.82rem;
-    color: var(--rule);
+    color: #2E3150;
     letter-spacing: 0.02em;
     font-style: italic;
   }
@@ -223,6 +234,34 @@
     .exp-header { flex-direction: column; gap: 2px; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  /* Subtle texture: thin indigo line at very top of page */
+  body::before {
+    content: '';
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #6366F1, transparent);
+  }
+  /* Availability dot pulse */
+  .avail-dot {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  /* Project item bg on hover */
+  .project-item:hover {
+    background: rgba(99,102,241,0.03);
+  }
+  /* Exp item subtle separator */
+  .exp-item {
+    padding-bottom: 36px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .exp-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 </style>
 </head>
 <body>
@@ -518,7 +557,7 @@
   <div class="footer-inner">
     <span class="footer-name">Yogendra Singh Negi</span>
     <span class="footer-sep">&middot;</span>
-    <span class="footer-made">Designed &amp; built by hand &middot; 2026</span>
+    <span class="footer-made">Designed &amp; built by hand &middot; 2025</span>
     <span class="footer-sep">&middot;</span>
     <a href="https://github.com/negicodes" target="_blank" class="footer-link">negicodes &#8599;</a>
   </div>
